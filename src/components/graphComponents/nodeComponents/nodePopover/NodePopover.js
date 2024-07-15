@@ -7,7 +7,6 @@ const NodePopover = ({
                          closePopover,
                          selectedNode,
                          handleInputChange,
-                         saveChanges,
                          position
                      }) => {
     return (
@@ -45,10 +44,13 @@ const NodePopover = ({
                                     onChange={handleInputChange}
                                 />
                             </label>
-                            <div className="popover-buttons">
-                                <button onClick={saveChanges}>Save</button>
-                                <button onClick={closePopover}>Close</button>
-                            </div>
+                            <input
+                                className="nodrag"
+                                type="color"
+                                name="color"
+                                defaultValue={selectedNode.data.color}
+                                onChange={handleInputChange}
+                            />
                         </div>
                     ) : (
                         <div>No node selected</div>

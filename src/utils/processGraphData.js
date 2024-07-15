@@ -1,10 +1,12 @@
 const processGraphData = (data) => {
     const nodes = Object.keys(data.state_data).map((key) => ({
         id: key,
-        type: 'default',
+        type: 'state',
         data: { label: key,
                 type: data.state_data[key].type ?? "",
-                n_substates: data.state_data[key].n_substates ?? 1},
+                n_substates: data.state_data[key].n_substates ?? 1,
+                color: 'green',
+        },
         position: { x: 400 + 100 * Math.random(), y: 300 + 200 * Math.random()},
     }));
 

@@ -13,12 +13,6 @@ const useNodePopover = (setElements) => {
         setPosition({y: event.clientY, x: event.clientX})
     };
 
-    const closePopover = () => {
-        setIsPopoverOpen(false);
-        setSelectedNode(null);
-    };
-
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setSelectedNode((prevState) => ({
@@ -36,7 +30,12 @@ const useNodePopover = (setElements) => {
                 el.id === selectedNode.id ? { ...el, data: { ...selectedNode.data } } : el
             )
         );
-        closePopover();
+    };
+
+    const closePopover = () => {
+        setIsPopoverOpen(false);
+        setSelectedNode(null);
+        saveChanges();
     };
 
     return {
@@ -45,7 +44,6 @@ const useNodePopover = (setElements) => {
         onNodeClick,
         closePopover,
         handleInputChange,
-        saveChanges,
         position
     };
 };

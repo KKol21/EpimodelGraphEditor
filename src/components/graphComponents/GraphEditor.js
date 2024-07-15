@@ -7,6 +7,7 @@ import '@xyflow/react/dist/style.css';
 import NodeCreator from './nodeComponents/NodeCreator';
 import NodePopover from './nodeComponents/nodePopover/NodePopover';
 import useNodePopover from './nodeComponents/nodePopover/useNodePopover';
+import StateNode from "./nodeComponents/nodeTypes/StateNode";
 
 // Edge related
 import TransitionEdge from './edgeComponents/TransitionEdge';
@@ -20,6 +21,10 @@ import OutputForm from '../OutputForm';
 const edgeTypes = {
     transition: TransitionEdge,
 };
+
+const nodeTypes = {
+    state: StateNode,
+}
 
 
 const GraphEditor = ({initialNodes, initialEdges}) => {
@@ -35,7 +40,6 @@ const GraphEditor = ({initialNodes, initialEdges}) => {
         onNodeClick,
         closePopover,
         handleInputChange,
-        saveChanges,
         nodeRef,
         position
     } = useNodePopover(setNodes);
@@ -54,7 +58,6 @@ const GraphEditor = ({initialNodes, initialEdges}) => {
                 closePopover={closePopover}
                 selectedNode={selectedNode}
                 handleInputChange={handleInputChange}
-                saveChanges={saveChanges}
                 position={position}
             />
             <div style={{height: '600px'}}>
@@ -66,7 +69,7 @@ const GraphEditor = ({initialNodes, initialEdges}) => {
                     onConnect={onConnect}
                     onNodeClick={onNodeClick}
                     edgeTypes={edgeTypes}
-                    style={{background: '#00fffB'}}
+                    nodeTypes={nodeTypes}
                 />
             </div>
             <OutputForm nodes={nodes} edges={edges}/>
