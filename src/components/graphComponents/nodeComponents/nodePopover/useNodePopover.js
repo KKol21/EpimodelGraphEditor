@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
 
-const useNodeEditor = (setElements) => {
+const useNodePopover = (setElements) => {
     const [isPopoverOpen, setIsPopoverOpen] = useState(false);
     const [selectedNode, setSelectedNode] = useState(null);
     const [position, setPosition] = useState({y: 0, x: 0});
@@ -50,4 +50,4 @@ const useNodeEditor = (setElements) => {
     };
 };
 
-export default useNodeEditor;
+export default useNodePopover;

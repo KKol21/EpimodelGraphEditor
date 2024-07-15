@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './nodePopover/useNodeEditor.css';
+import './nodePopover/useNodePopover.css';
 
-const NodeCreator = ({ nodes, setNodes, nodeCounter, setNodeCounter }) => {
+const NodeCreator = ({setNodes, nodeCounter, setNodeCounter }) => {
     const [newNodeLabel, setNewNodeLabel] = useState('');
     const [newNodeType, setNewNodeType] = useState('');
     const [newNodeSubstates, setNewNodeSubstates] = useState(0);

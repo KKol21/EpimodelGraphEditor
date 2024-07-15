@@ -1,12 +1,12 @@
 // General imports
 import React, {useState} from 'react';
-import ReactFlow, {useNodesState, useEdgesState} from 'reactflow';
-import 'reactflow/dist/style.css';
+import {ReactFlow, useNodesState, useEdgesState} from '@xyflow/react';
+import '@xyflow/react/dist/style.css';
 
 // Node related
 import NodeCreator from './nodeComponents/NodeCreator';
 import NodePopover from './nodeComponents/nodePopover/NodePopover';
-import useNodeEditor from './nodeComponents/nodePopover/useNodeEditor';
+import useNodePopover from './nodeComponents/nodePopover/useNodePopover';
 
 // Edge related
 import TransitionEdge from './edgeComponents/TransitionEdge';
@@ -38,13 +38,12 @@ const GraphEditor = ({initialNodes, initialEdges}) => {
         saveChanges,
         nodeRef,
         position
-    } = useNodeEditor(setNodes);
+    } = useNodePopover(setNodes);
 
     return (
         <div>
             <MarkerDefinition/>
             <NodeCreator
-                nodes={nodes}
                 setNodes={setNodes}
                 nodeCounter={nodeCounter}
                 setNodeCounter={setNodeCounter}

@@ -1,5 +1,5 @@
 import React from 'react';
-import {getBezierPath, BaseEdge, EdgeLabelRenderer} from 'reactflow';
+import {getBezierPath, BaseEdge, EdgeLabelRenderer} from '@xyflow/react';
 
 
 export default function TransitionEdge({id, data, markerEnd, ...props}) {
@@ -23,6 +23,14 @@ export default function TransitionEdge({id, data, markerEnd, ...props}) {
                     {data.param}
                 </div>
             </EdgeLabelRenderer>
+            <circle
+                style={{ filter: `drop-shadow(3px 3px 5px #00ff00` }}
+                r="4"
+                fill={`#00ff00`}
+                className="circle"
+            >
+                <animateMotion dur="3s" repeatCount="indefinite" path={edgePath} />
+            </circle>
         </>
     );
 };
