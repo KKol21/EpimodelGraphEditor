@@ -6,7 +6,10 @@ export default function TransitionEdge({id, data, markerEnd, ...props}) {
     const [edgePath, labelX, labelY] = getBezierPath(props);
     return (
         <>
-            <BaseEdge id={id} path={edgePath} markerEnd={markerEnd}/>
+            <BaseEdge id={id}
+                      path={edgePath}
+                      markerEnd={markerEnd}
+                      style={{animation: "dashdraw 0.2s linear infinite"}}/>
             <EdgeLabelRenderer>
                 <div
                     style={{
