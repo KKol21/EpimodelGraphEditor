@@ -19,6 +19,7 @@ const processGraphData = (data) => {
         markerEnd: "arrow"
     }));
 
+    /*
     const tmsEdges = data.tms_rules.map((tms, index) => ({
         id: `tms-${index}`,
         source: tms.source,
@@ -26,8 +27,8 @@ const processGraphData = (data) => {
         data: {type: 'tms', 'actors-params': tms['actors-params']},
         animated: true,
     }));
-
-    return { nodes, edges: [...transEdges, ...tmsEdges] };
+    ...tmsEdges*/
+    return { nodes, edges: [...transEdges,] };
 };
 
 export default processGraphData;

@@ -1,0 +1,38 @@
+.transmission-manager {
+    position: absolute;
+    top: 320px; /* Adjust as needed */
+    left: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 10;
+}
+
+.transmission-select {
+    width: 150px;
+    margin-bottom: 8px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.actor-parameter {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.actor-parameter span {
+    margin-right: 8px;
+}
+
+.parameter-input {
+    width: 100px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

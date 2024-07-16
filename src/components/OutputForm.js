@@ -7,7 +7,7 @@ const OutputForm = ({ nodes, edges }) => {
         const tms_rules = [];
 
         nodes.forEach(node => {
-            state_data[node.id] = { type: node.data.label.toLowerCase() };
+            state_data[node.id] = { type: node.data.type};
         });
 
         edges.forEach(edge => {

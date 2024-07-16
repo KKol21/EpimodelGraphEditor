@@ -1,29 +1,33 @@
 import React, { useState } from 'react';
-import './nodePopover/useNodePopover.css';
+import './NodeCreator.css';
 
-const NodeCreator = ({setNodes, nodeCounter, setNodeCounter }) => {
+const NodeCreator = ({nodes, setNodes }) => {
     const [newNodeLabel, setNewNodeLabel] = useState('');
     const [newNodeType, setNewNodeType] = useState('');
-    const [newNodeSubstates, setNewNodeSubstates] = useState(0);
+    const [newNodeSubstates, setNewNodeSubstates] = useState(1);
     const [newNodeColor, setNewNodeColor] = useState('#00ff00');
 
     const addNode = () => {
-        const newNode = {
-            id: `n${nodeCounter}`,
-            type: 'state',
-            data: {
-                label: newNodeLabel || `Node ${nodeCounter}`,
-                type: newNodeType || ' ',
-                n_substates: newNodeSubstates || 1,
-                color: newNodeColor,
-            },
-            position: { x: 100 + 500 * Math.random(), y: 100 + 500 * Math.random()},
-        };
-        setNodes((nds) => nds.concat(newNode));
-        setNodeCounter(nodeCounter + 1);
-        setNewNodeLabel('');
-        setNewNodeType('');
-        setNewNodeSubstates(1);
+        if (newNodeLabel && !nodes.some(node => node.id === newNodeLabel)) {
+            const newNode = {
+                id: newNodeLabel,
+                type: 'state',
+                data: {
+                    label: newNodeLabel,
+                    type: newNodeType || ' ',
+                    n_substates: newNodeSubstates,
+                    color: newNodeColor,
+                },
+                position: { x: 100 + 500 * Math.random(), y: 100 + 500 * Math.random()},
+            };
+            setNodes((nds) => nds.concat(newNode));
+            setNewNodeLabel('');
+            setNewNodeType('');
+            setNewNodeSubstates(1);
+        }
+        else {
+            alert('Node label is required and must be unique.');
+        }
     };
 
     return (

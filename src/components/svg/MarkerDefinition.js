@@ -16,8 +16,8 @@ const MarkerDefinition = () => (
             >
                 <polyline
                     style={{
-                        stroke: "hotpink",
-                        fill: "hotpink",
+                        stroke: "black",
+                        fill: "black",
                         strokeWidth: 1,
                     }}
                     strokeLinecap="round"

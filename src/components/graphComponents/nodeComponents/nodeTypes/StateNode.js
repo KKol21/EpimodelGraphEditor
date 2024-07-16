@@ -2,7 +2,6 @@ import React, {memo} from 'react';
 import {Handle} from '@xyflow/react';
 
 export default memo(({data, isConnectable}) => {
-    console.log(data);
     return (
         <div
             style={{
@@ -17,7 +16,7 @@ export default memo(({data, isConnectable}) => {
         >
             <Handle
                 type="source"
-                position="left"
+                position="bottom"
                 style={{background: '#555'}}
                 isConnectable={isConnectable}
             />
@@ -27,7 +26,7 @@ export default memo(({data, isConnectable}) => {
 
             <Handle
                 type="target"
-                position="right"
+                position="top"
                 style={{background: '#555'}}
                 isConnectable={isConnectable}
             />
