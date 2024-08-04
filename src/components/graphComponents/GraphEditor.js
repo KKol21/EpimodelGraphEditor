@@ -20,7 +20,6 @@ import TransmissionManager from "./edgeComponents/TransmissionManager/Transmissi
 // Other
 import MarkerDefinition from "../svg/MarkerDefinition";
 import OutputForm from '../OutputForm';
-import {ControlButton, getConnectedEdges, isEdge} from "reactflow";
 
 
 const edgeTypes = {
@@ -41,7 +40,7 @@ const GraphEditor = ({initialNodes, initialEdges}) => {
         const {
             isPopoverOpen,
             selectedNode,
-            onNodeClick,
+            onNodeDoubleClick,
             closePopover,
             handleInputChange,
             position
@@ -73,7 +72,8 @@ const GraphEditor = ({initialNodes, initialEdges}) => {
                         onNodesChange={onNodesChange}
                         onEdgesChange={onEdgesChange}
                         onConnect={onConnect}
-                        onNodeClick={onNodeClick}
+                        onNodeDoubleClick={onNodeDoubleClick}
+                        deleteKeyCode={["Backspace","Delete"]}
                         edgeTypes={edgeTypes}
                         nodeTypes={nodeTypes}
                     >

@@ -6,7 +6,7 @@ const useNodePopover = (setElements) => {
     const [selectedNode, setSelectedNode] = useState(null);
     const [position, setPosition] = useState({y: 0, x: 0});
 
-    const onNodeClick = (event, node) => {
+    const onNodeDoubleClick = (event, node) => {
         if (node.type === "state") {
             event.stopPropagation();
             setSelectedNode(node);
@@ -43,7 +43,7 @@ const useNodePopover = (setElements) => {
     return {
         isPopoverOpen,
         selectedNode,
-        onNodeClick,
+        onNodeDoubleClick,
         closePopover,
         handleInputChange,
         position
