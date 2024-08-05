@@ -4,7 +4,7 @@ import {ReactFlow, useNodesState, useEdgesState} from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
 // Node related
-import NodeCreator from './nodeComponents/nodeCreator/NodeCreator';
+import NodeCreator from './nodeComponents/NodeCreator';
 import NodePopover from './nodeComponents/nodePopover/NodePopover';
 import useNodePopover from './nodeComponents/nodePopover/useNodePopover';
 import StateNode from "./nodeComponents/nodeTypes/StateNode";
