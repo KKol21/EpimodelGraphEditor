@@ -12,14 +12,16 @@ import InfectionNode from "./nodeComponents/nodeTypes/InfectionNode";
 
 // Edge related
 import TransitionEdge from './edgeComponents/TransitionEdge';
-import useEdgeConnection from './hooks/useEdgeConnection';
+import useEdgeConnection from '../../hooks/useEdgeConnection';
 
 // Transmission
-import TransmissionManager from "./edgeComponents/TransmissionManager/TransmissionManager";
+import TransmissionManager from "./TransmissionManager/TransmissionManager";
 
 // Other
 import MarkerDefinition from "../svg/MarkerDefinition";
 import OutputForm from '../OutputForm';
+import useEdgePopover from "./edgeComponents/edgePopover/useEdgePopover";
+import EdgePopover from "./edgeComponents/edgePopover/EdgePopover";
 
 
 const edgeTypes = {
@@ -38,13 +40,24 @@ const GraphEditor = ({initialNodes, initialEdges}) => {
         const onConnect = useEdgeConnection(setEdges);
 
         const {
-            isPopoverOpen,
+            isNodePopoverOpen,
             selectedNode,
             onNodeDoubleClick,
-            closePopover,
-            handleInputChange,
-            position
+            closeNodePopover,
+            handleNodeInputChange,
+            nodePosition
         } = useNodePopover(setNodes);
+
+        const {
+            isEdgePopoverOpen,
+            selectedEdge,
+            onEdgeDoubleClick,
+            closeEdgePopover,
+            handleEdgeInputChange,
+            edgePosition,
+            addParam,
+            deleteParam
+        } = useEdgePopover(setEdges);
 
         return (
             <div>
@@ -59,11 +72,20 @@ const GraphEditor = ({initialNodes, initialEdges}) => {
                     setEdges={setEdges}
                 />
                 <NodePopover
-                    isPopoverOpen={isPopoverOpen}
-                    closePopover={closePopover}
+                    isPopoverOpen={isNodePopoverOpen}
+                    closePopover={closeNodePopover}
                     selectedNode={selectedNode}
-                    handleInputChange={handleInputChange}
-                    position={position}
+                    handleInputChange={handleNodeInputChange}
+                    nodePosition={nodePosition}
+                />
+                <EdgePopover
+                    isEdgePopoverOpen={isEdgePopoverOpen}
+                    closeEdgePopover={closeEdgePopover}
+                    selectedEdge={selectedEdge}
+                    handleEdgeInputChange={handleEdgeInputChange}
+                    edgePosition={edgePosition}
+                    addParam={addParam}
+                    deleteParam={deleteParam}
                 />
                 <div style={{height: '600px'}}>
                     <ReactFlow
@@ -73,6 +95,7 @@ const GraphEditor = ({initialNodes, initialEdges}) => {
                         onEdgesChange={onEdgesChange}
                         onConnect={onConnect}
                         onNodeDoubleClick={onNodeDoubleClick}
+                        onEdgeDoubleClick={onEdgeDoubleClick}
                         deleteKeyCode={["Backspace","Delete"]}
                         edgeTypes={edgeTypes}
                         nodeTypes={nodeTypes}

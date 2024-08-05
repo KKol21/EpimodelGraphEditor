@@ -15,7 +15,7 @@ const processGraphData = (data) => {
         source: trans.source,
         target: trans.target,
         type: 'transition',
-        data: {param: trans.param },
+        data: {params: trans.params},
         markerEnd: "arrow"
     }));
 

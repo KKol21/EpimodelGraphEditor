@@ -2,20 +2,20 @@ import {useState} from 'react';
 
 
 const useNodePopover = (setElements) => {
-    const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+    const [isNodePopoverOpen, setIsNodePopoverOpen] = useState(false);
     const [selectedNode, setSelectedNode] = useState(null);
-    const [position, setPosition] = useState({y: 0, x: 0});
+    const [nodePosition, setNodePosition] = useState({y: 0, x: 0});
 
     const onNodeDoubleClick = (event, node) => {
         if (node.type === "state") {
             event.stopPropagation();
             setSelectedNode(node);
-            setIsPopoverOpen(true);
-            setPosition({y: event.clientY, x: event.clientX})
+            setIsNodePopoverOpen(true);
+            setNodePosition({y: event.clientY, x: event.clientX})
         }
     };
 
-    const handleInputChange = (e) => {
+    const handleNodeInputChange = (e) => {
         const { name, value } = e.target;
         setSelectedNode((prevState) => ({
             ...prevState,
@@ -34,19 +34,19 @@ const useNodePopover = (setElements) => {
         );
     };
 
-    const closePopover = () => {
-        setIsPopoverOpen(false);
+    const closeNodePopover = () => {
+        setIsNodePopoverOpen(false);
         setSelectedNode(null);
         saveChanges();
     };
 
     return {
-        isPopoverOpen,
+        isNodePopoverOpen,
         selectedNode,
         onNodeDoubleClick,
-        closePopover,
-        handleInputChange,
-        position
+        closeNodePopover,
+        handleNodeInputChange,
+        nodePosition
     };
 };
 

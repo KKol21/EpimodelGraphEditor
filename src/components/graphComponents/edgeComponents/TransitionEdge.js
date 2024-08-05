@@ -4,12 +4,25 @@ import {getBezierPath, BaseEdge, EdgeLabelRenderer} from '@xyflow/react';
 
 export default function TransitionEdge({id, data, markerEnd, ...props}) {
     const [edgePath, labelX, labelY] = getBezierPath(props);
+    data.params = data.params || [];
+
+    const getLabel = (params) => {
+        return params
+            .filter(param => param !== "")
+            .map(param => {
+                if (param.endsWith('_')) {
+                    return `(1 - ${param.slice(0, -1)})`;
+                } else {
+                    return param;
+                }
+            }).join(' * ');
+    };
+
     return (
         <>
             <BaseEdge id={id}
                       path={edgePath}
-                      markerEnd={markerEnd}
-                      style={{animation: "dashdraw 0.2s linear infinite"}}/>
+                      markerEnd={markerEnd}/>
             <EdgeLabelRenderer>
                 <div
                     style={{
@@ -23,16 +36,16 @@ export default function TransitionEdge({id, data, markerEnd, ...props}) {
                     }}
                     className="nodrag nopan"
                 >
-                    {data.param}
+                    {getLabel(data.params)}
                 </div>
             </EdgeLabelRenderer>
             <circle
-                style={{ filter: `drop-shadow(3px 3px 5px #00ff00` }}
+                style={{filter: `drop-shadow(3px 3px 5px #00ff00`}}
                 r="4"
                 fill={`#00ff00`}
                 className="circle"
             >
-                <animateMotion dur="3s" repeatCount="indefinite" path={edgePath} />
+                <animateMotion dur="3s" repeatCount="indefinite" path={edgePath}/>
             </circle>
         </>
     );

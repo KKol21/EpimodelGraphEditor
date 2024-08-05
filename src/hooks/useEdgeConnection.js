@@ -9,7 +9,7 @@ const useEdgeConnection = (setEdges) => {
                         ...params,
                         type: "transition",
                         markerEnd: "arrow",
-                        data: {param: 'Edge Label'}
+                        data: {param: 'Trans param'}
                     },
                     eds)),
         [setEdges]

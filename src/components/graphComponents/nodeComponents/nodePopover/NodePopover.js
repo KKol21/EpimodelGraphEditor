@@ -7,7 +7,7 @@ const NodePopover = ({
                          closePopover,
                          selectedNode,
                          handleInputChange,
-                         position
+                         nodePosition
                      }) => {
     return (
         <Popover
@@ -62,7 +62,7 @@ const NodePopover = ({
                 zIndex: 1000,
             }}
         >
-            <div style={{position: 'absolute', top: `${position.y - 20}px`, left: `${position.x}px`}}/>
+            <div style={{position: 'absolute', top: `${nodePosition.y - 20}px`, left: `${nodePosition.x}px`}}/>
         </Popover>
     );
 };
