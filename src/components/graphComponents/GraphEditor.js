@@ -52,10 +52,8 @@ const GraphEditor = ({initialNodes, initialEdges}) => {
 
         const {
             isNodePopoverOpen,
-            setIsNodePopoverOpen,
             selectedNode,
-            setSelectedNode,
-            setNodePosition,
+            openNodePopover,
             closeNodePopover,
             handleNodeInputChange,
             nodePosition
@@ -82,15 +80,15 @@ const GraphEditor = ({initialNodes, initialEdges}) => {
         } = useTransmissionPopover(nodes, setNodes, edges, setEdges);
 
         const onNodeDoubleClick = (event, node) => {
-            if (node.type === "state") {
-                event.stopPropagation();
-                setSelectedNode(node);
-                setIsNodePopoverOpen(true);
-                setNodePosition({y: event.clientY, x: event.clientX})
-            }
-            if (node.type === "infection") {
-                event.stopPropagation();
-                openTmsPopover(event, node)
+            event.stopPropagation();
+            switch (node.type) {
+                case ("state"):
+                    openNodePopover(event, node);
+                    break;
+                case ("infection"):
+                    openTmsPopover(event, node);
+                    break;
+                default:
             }
         };
 

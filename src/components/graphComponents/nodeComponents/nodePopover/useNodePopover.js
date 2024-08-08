@@ -6,6 +6,12 @@ const useNodePopover = (setElements) => {
     const [selectedNode, setSelectedNode] = useState(null);
     const [nodePosition, setNodePosition] = useState({y: 0, x: 0});
 
+    const openNodePopover = (event, node) => {
+        setSelectedNode(node);
+        setIsNodePopoverOpen(true);
+        setNodePosition({y: event.clientY, x: event.clientX})
+    };
+
     const handleNodeInputChange = (e) => {
         const { name, value } = e.target;
         setSelectedNode((prevState) => ({
@@ -33,10 +39,8 @@ const useNodePopover = (setElements) => {
 
     return {
         isNodePopoverOpen,
-        setIsNodePopoverOpen,
         selectedNode,
-        setSelectedNode,
-        setNodePosition,
+        openNodePopover,
         closeNodePopover,
         handleNodeInputChange,
         nodePosition
