@@ -12,26 +12,34 @@ import InfectionNode from "./nodeComponents/nodeTypes/InfectionNode";
 
 // Edge related
 import TransitionEdge from './edgeComponents/TransitionEdge';
+import InfectionEdge from "./edgeComponents/InfectionEdge";
+import TmsTransitionEdge from "./edgeComponents/TmsTransitionEdge";
+
 import useEdgeConnection from '../../hooks/useEdgeConnection';
-
-// Transmission
-import TransmissionManager from "./TransmissionManager/TransmissionManager";
-
-// Other
-import MarkerDefinition from "../svg/MarkerDefinition";
-import OutputForm from '../OutputForm';
 import useEdgePopover from "./edgeComponents/edgePopover/useEdgePopover";
 import EdgePopover from "./edgeComponents/edgePopover/EdgePopover";
 
 
-const edgeTypes = {
-    transition: TransitionEdge,
-};
+// Transmission
+import TransmissionCreator from "./transmissionComponents/transmissionCreator/TransmissionCreator";
+import useTransmissionPopover from "./transmissionComponents/transmissionPopover/useTransmissionPopover";
+import TransmissionPopover from "./transmissionComponents/transmissionPopover/TransmissionPopover";
+
+// Other
+import MarkerDefinition from "../svg/MarkerDefinition";
+import OutputForm from '../OutputForm';
+
 
 const nodeTypes = {
     state: StateNode,
     infection: InfectionNode
 }
+
+const edgeTypes = {
+    transition: TransitionEdge,
+    infection: InfectionEdge,
+    tmsTrans: TmsTransitionEdge
+};
 
 
 const GraphEditor = ({initialNodes, initialEdges}) => {
@@ -41,12 +49,47 @@ const GraphEditor = ({initialNodes, initialEdges}) => {
 
         const {
             isNodePopoverOpen,
+            setIsNodePopoverOpen,
             selectedNode,
-            onNodeDoubleClick,
+            setSelectedNode,
+            setNodePosition,
             closeNodePopover,
             handleNodeInputChange,
             nodePosition
         } = useNodePopover(setNodes);
+
+        const susceptibleNodes = nodes.filter(node => node.data && node.data.type === 'susceptible');
+        const infectedNodes = nodes.filter(node => node.data && node.data.type === 'infected');
+
+        const {
+            isTmsPopoverOpen,
+            tmsPopoverPosition,
+            selectedTmsSource,
+            setSelectedTmsSource,
+            selectedTmsTarget,
+            setSelectedTmsTarget,
+            selectedTmsActors,
+            handleAddTmsActor,
+            handleTmsParameterChange,
+            handleRemoveTmsActor,
+            tmsActorParameters,
+            openTmsPopover,
+            closeTmsPopover,
+            saveTmsChanges
+        } = useTransmissionPopover(nodes, setNodes, edges, setEdges);
+
+        const onNodeDoubleClick = (event, node) => {
+            if (node.type === "state") {
+                event.stopPropagation();
+                setSelectedNode(node);
+                setIsNodePopoverOpen(true);
+                setNodePosition({y: event.clientY, x: event.clientX})
+            }
+            if (node.type === "infection") {
+                event.stopPropagation();
+                openTmsPopover(event.clientX, event.clientY, node)
+            }
+        };
 
         const {
             isEdgePopoverOpen,
@@ -66,7 +109,7 @@ const GraphEditor = ({initialNodes, initialEdges}) => {
                     nodes={nodes}
                     setNodes={setNodes}
                 />
-                <TransmissionManager
+                <TransmissionCreator
                     nodes={nodes}
                     setNodes={setNodes}
                     setEdges={setEdges}
@@ -86,6 +129,23 @@ const GraphEditor = ({initialNodes, initialEdges}) => {
                     edgePosition={edgePosition}
                     addParam={addParam}
                     deleteParam={deleteParam}
+                />
+                <TransmissionPopover
+                    isTmsPopoverOpen={isTmsPopoverOpen}
+                    tmsPopoverPosition={tmsPopoverPosition}
+                    selectedTmsSource={selectedTmsSource}
+                    setSelectedTmsSource={setSelectedTmsSource}
+                    selectedTmsTarget={selectedTmsTarget}
+                    setSelectedTmsTarget={setSelectedTmsTarget}
+                    selectedTmsActors={selectedTmsActors}
+                    handleAddTmsActor={handleAddTmsActor}
+                    handleTmsParameterChange={handleTmsParameterChange}
+                    handleRemoveTmsActor={handleRemoveTmsActor}
+                    tmsActorParameters={tmsActorParameters}
+                    susceptibleNodes={susceptibleNodes}
+                    infectedNodes={infectedNodes}
+                    closeTmsPopover={closeTmsPopover}
+                    saveTmsChanges={saveTmsChanges}
                 />
                 <div style={{height: '600px'}}>
                     <ReactFlow

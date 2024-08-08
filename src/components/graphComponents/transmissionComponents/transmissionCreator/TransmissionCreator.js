@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import './TransmissionManager.css'; // Import the CSS file
+import React, {useState} from 'react';
+import './TransmissionCreator.css'; // Import the CSS file
 
-const TransmissionManager = ({ nodes, setNodes, setEdges }) => {
+const TransmissionCreator = ({nodes, setNodes, setEdges}) => {
     const [selectedSource, setSelectedSource] = useState('');
     const [selectedTarget, setSelectedTarget] = useState('');
     const [selectedActors, setSelectedActors] = useState([]);
@@ -15,17 +15,17 @@ const TransmissionManager = ({ nodes, setNodes, setEdges }) => {
         const actorId = e.target.value;
         if (actorId && !selectedActors.includes(actorId)) {
             setSelectedActors([...selectedActors, actorId]);
-            setActorParameters({ ...actorParameters, [actorId]: '' });
+            setActorParameters({...actorParameters, [actorId]: ''});
         }
     };
 
     const handleParameterChange = (actorId, value) => {
-        setActorParameters({ ...actorParameters, [actorId]: value });
+        setActorParameters({...actorParameters, [actorId]: value});
     };
 
     const handleRemoveActor = (actorId) => {
         setSelectedActors(selectedActors.filter(id => id !== actorId));
-        const { [actorId]: _, ...newActorParameters } = actorParameters;
+        const {[actorId]: _, ...newActorParameters} = actorParameters;
         setActorParameters(newActorParameters);
     };
 
@@ -38,38 +38,48 @@ const TransmissionManager = ({ nodes, setNodes, setEdges }) => {
         const infNode = {
             id: `tms_${tmsRuleCounter}`,
             type: 'infection',
-            position: {x: x, y: y}
+            position: {x: x, y: y},
+            data: {
+                tmsRule: {
+                    source: selectedSource,
+                    target: selectedTarget,
+                    actors: selectedActors,
+                    params: Object.assign({},
+                        ...selectedActors.map(actor => ({[actor]: actorParameters[actor]}))),
+                }
+            }
         };
 
         setNodes((nds) => nds.concat(infNode));
 
         const tmsEdges = [
             {
-                id: `tms-${tmsRuleCounter}-${sourceNode.id}-inf`,
+                id: `tms-${tmsRuleCounter}_source-${sourceNode.id}-`,
                 source: sourceNode.id,
                 target: infNode.id,
-                type: 'default',
-                animated: true
+                type: 'tmsTrans',
+                markerEnd: "arrow"
             },
             {
-                id: `tms-${tmsRuleCounter}inf-${targetNode.id}`,
+                id: `tms-${tmsRuleCounter}_target-${targetNode.id}`,
                 source: infNode.id,
                 target: targetNode.id,
-                type: 'default',
-                animated: true
+                type: 'tmsTrans',
+                markerEnd: "arrow"
             }
         ];
         const infEdges = selectedActors.map(actor => ({
-            id: `tms-${tmsRuleCounter}-actor-${actor}`,
+            id: `tms-${tmsRuleCounter}_actor-${actor}`,
             source: actor,
             target: infNode.id,
             targetHandle: "infection",
-            label: actorParameters[actor],
-            type: 'default'
+            label: actorParameters[actor] || "",
+            type: 'infection',
+            markerEnd: "arrow"
         }));
 
         setEdges((edges) => edges.concat(...infEdges, ...tmsEdges));
-        //setTmsRuleCounter(tmsRuleCounter + 1);
+        setTmsRuleCounter(tmsRuleCounter + 1);
     }
 
 
@@ -132,9 +142,9 @@ const TransmissionManager = ({ nodes, setNodes, setEdges }) => {
                     </div>
                 ))}
             </div>
-            <button onClick={handleAddTransmissionRule}> Add transmission rule </button>
+            <button onClick={handleAddTransmissionRule}> Add transmission rule</button>
         </div>
     );
 };
 
-export default TransmissionManager;
+export default TransmissionCreator;
