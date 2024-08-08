@@ -5,12 +5,11 @@ const useEdgePopover = (setEdges) => {
     const [selectedEdge, setSelectedEdge] = useState(null);
     const [edgePosition, setEdgePosition] = useState({ y: 0, x: 0 });
 
-    const onEdgeDoubleClick = (event, edge) => {
-        event.stopPropagation();
+    const openEdgePopover = (event, edge) => {
         setSelectedEdge(edge);
         setIsEdgePopoverOpen(true);
         setEdgePosition({ y: event.clientY, x: event.clientX });
-    };
+    }
 
     const handleEdgeInputChange = (index, e) => {
         const { value } = e.target;
@@ -67,7 +66,7 @@ const useEdgePopover = (setEdges) => {
     return {
         isEdgePopoverOpen,
         selectedEdge,
-        onEdgeDoubleClick,
+        openEdgePopover,
         closeEdgePopover,
         handleEdgeInputChange,
         edgePosition,

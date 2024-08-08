@@ -54,14 +54,14 @@ const TransmissionCreator = ({nodes, setNodes, setEdges}) => {
 
         const tmsEdges = [
             {
-                id: `tms-${tmsRuleCounter}_source-${sourceNode.id}-`,
+                id: `tms_${tmsRuleCounter}_source_${sourceNode.id}`,
                 source: sourceNode.id,
                 target: infNode.id,
                 type: 'tmsTrans',
                 markerEnd: "arrow"
             },
             {
-                id: `tms-${tmsRuleCounter}_target-${targetNode.id}`,
+                id: `tms_${tmsRuleCounter}_target_${targetNode.id}`,
                 source: infNode.id,
                 target: targetNode.id,
                 type: 'tmsTrans',
@@ -69,7 +69,7 @@ const TransmissionCreator = ({nodes, setNodes, setEdges}) => {
             }
         ];
         const infEdges = selectedActors.map(actor => ({
-            id: `tms-${tmsRuleCounter}_actor-${actor}`,
+            id: `tms_${tmsRuleCounter}_actor_${actor}`,
             source: actor,
             target: infNode.id,
             targetHandle: "infection",

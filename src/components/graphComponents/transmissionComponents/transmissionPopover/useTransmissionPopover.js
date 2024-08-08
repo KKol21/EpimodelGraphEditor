@@ -9,8 +9,8 @@ const useTransmissionPopover = (nodes, setNodes, edges, setEdges) => {
     const [tmsActorParameters, setTmsActorParameters] = useState({});
     const [tmsRuleId, setTmsRuleId] = useState(null);
 
-    const openTmsPopover = (x, y, tmsNode) => {
-        setTmsPopoverPosition({x, y});
+    const openTmsPopover = (event, tmsNode) => {
+        setTmsPopoverPosition({x: event.clientX, y: event.clientY});
         const {source, target, actors, params} = tmsNode.data.tmsRule;
         setSelectedTmsSource(source);
         setSelectedTmsTarget(target);
@@ -75,14 +75,14 @@ const useTransmissionPopover = (nodes, setNodes, edges, setEdges) => {
 
         const tmsEdges = [
             {
-                id: `tms-${tmsRuleId}_source-${sourceNode.id}`,
+                id: `tms_${tmsRuleId}_source_${sourceNode.id}`,
                 source: sourceNode.id,
                 target: infNode.id,
                 type: 'tmsTrans',
                 markerEnd: "arrow"
             },
             {
-                id: `tms-${tmsRuleId}_target-${targetNode.id}`,
+                id: `tms_${tmsRuleId}_target_${targetNode.id}`,
                 source: infNode.id,
                 target: targetNode.id,
                 type: 'tmsTrans',
@@ -93,7 +93,7 @@ const useTransmissionPopover = (nodes, setNodes, edges, setEdges) => {
         const infEdges = selectedTmsActors.map(actor =>
             (
                 {
-                    id: `tms-${tmsRuleId}-actor-${actor}`,
+                    id: `tms_${tmsRuleId}_actor_${actor}`,
                     source: actor,
                     target: infNode.id,
                     targetHandle: "infection",
