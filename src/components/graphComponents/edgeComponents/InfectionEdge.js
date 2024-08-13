@@ -1,5 +1,5 @@
 import React from 'react';
-import {getBezierPath, BaseEdge, EdgeLabelRenderer} from '@xyflow/react';
+import {getBezierPath, BaseEdge} from '@xyflow/react';
 
 
 export default function InfectionEdge({id, label, markerEnd, ...props}) {
@@ -10,6 +10,8 @@ export default function InfectionEdge({id, label, markerEnd, ...props}) {
                       path={edgePath}
                       markerEnd={markerEnd}
                       label={label}
+                      labelX={labelX}
+                      labelY={labelY}
             />
         </>
     );
