@@ -116,7 +116,6 @@ const useTransmissionPopover = (nodes, setNodes, edges, setEdges) => {
             params: Object.assign({},
                 ...selectedTmsActors.map(actor => ({[actor]: tmsActorParameters[actor]}))),
         }
-        console.log(tmsRule.params);
         setNodes(nodes.map(
             node => (node.id === `tms_${tmsRuleId}` ?
                     {...node, data: {tmsRule: tmsRule}} :

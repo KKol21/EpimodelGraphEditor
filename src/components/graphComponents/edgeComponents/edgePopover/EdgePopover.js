@@ -33,7 +33,10 @@ const EdgePopover = ({
                                         placeholder="Parameter Name"
                                         onChange={(e) => handleEdgeInputChange(index, e)}
                                     />
-                                    <button onClick={() => deleteParam(index)}>Delete</button>
+                                    <button onClick={(e) => {
+                                        e.stopPropagation();
+                                        deleteParam(index);
+                                    }}>Delete</button>
                                 </div>
                             ))}
                             <button onClick={handleAddParam}>Add Parameter</button>

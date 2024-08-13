@@ -80,7 +80,10 @@ const TransmissionPopover = ({
                                     value={tmsActorParameters[actorId]}
                                     onChange={(e) => handleTmsParameterChange(actorId, e.target.value)}
                                 />
-                                <button onClick={() => handleRemoveTmsActor(actorId)}>Remove</button>
+                                <button onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleRemoveTmsActor(actorId);
+                                }}>Remove</button>
                             </div>
                         ))}
                     </div>
