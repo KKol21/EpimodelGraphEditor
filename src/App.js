@@ -10,7 +10,6 @@ const { nodes, edges } = processGraphData(seirData);
 function App() {
     return (
         <div className="App">
-            <h1>Epidemic Transmission Graph Editor</h1>
             <GraphEditor initialNodes={nodes} initialEdges={edges}/>
         </div>
     );

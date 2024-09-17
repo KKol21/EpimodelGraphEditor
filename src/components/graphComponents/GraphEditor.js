@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { ReactFlow, useNodesState, useEdgesState } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
@@ -67,7 +67,7 @@ const GraphEditor = ({ initialNodes, initialEdges }) => {
                 edges={edges}
                 setEdges={setEdges}
             />
-            <div style={{ height: '600px' }}>
+            <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
                 <ReactFlow
                     nodes={nodes}
                     edges={edges}
@@ -79,10 +79,16 @@ const GraphEditor = ({ initialNodes, initialEdges }) => {
                     deleteKeyCode={["Backspace", "Delete"]}
                     edgeTypes={edgeTypes}
                     nodeTypes={nodeTypes}
+                    style={{ width: '100%', height: '100%' }}
                 />
+
+                <div style={{ position: 'absolute', top: 10, left: 10 }}>
+                    <SaveFlowButton nodes={nodes} edges={edges} />
+                </div>
+                <div style={{ position: 'absolute', top: 10, left: 100 }}>
+                    <OutputForm nodes={nodes} edges={edges} />
+                </div>
             </div>
-            <SaveFlowButton nodes={nodes} edges={edges} />
-            <OutputForm nodes={nodes} edges={edges} />
         </div>
     );
 };
