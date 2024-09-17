@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import './Snackbar.css';
 
 const Snackbar = ({ message, visible, setVisible}) => {
@@ -10,7 +10,7 @@ const Snackbar = ({ message, visible, setVisible}) => {
             }, 2000);
             return () => clearTimeout(timer);
         }
-    }, [visible]);
+    }, [visible, setVisible]);
 
     return (
         <div id="snackbar" className={visible ? 'show' : ''}>
