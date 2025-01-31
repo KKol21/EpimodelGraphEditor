@@ -16,7 +16,7 @@ export const Popovers =
         closeNodePopover,
         handleNodeInputChange,
         nodePosition
-    } = useNodePopover(setNodes);
+    } = useNodePopover(setNodes, setEdges);
 
     // Edge Popover Logic
     const {

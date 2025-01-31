@@ -22,7 +22,7 @@ const NodePopover = ({
                                 <input
                                     type="text"
                                     name="label"
-                                    value={selectedNode.id}
+                                    value={selectedNode.id ?? ''}
                                     onChange={handleInputChange}
                                 />
                             </label>
