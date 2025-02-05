@@ -9,7 +9,6 @@ import InfectionNode from "./nodeComponents/nodeTypes/InfectionNode";
 // DAO
 import NodeCreator from './nodeComponents/nodeCreator/NodeCreator';
 import useEdgeConnection from '../../hooks/useEdgeConnection';
-import TransmissionCreator from "./transmissionComponents/transmissionCreator/TransmissionCreator";
 import { Popovers } from "./Popovers";
 
 // Edge types

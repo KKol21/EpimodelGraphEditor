@@ -219,7 +219,9 @@ const TransmissionCreator = ({ isCreatorOpen, setIsCreatorOpen, creatorPosition,
                                         value={actorParameters[actorId]}
                                         onChange={(e) => handleParameterChange(actorId, e.target.value)}
                                     />
-                                    <button onClick={() => handleRemoveActor(actorId)}>Remove</button>
+                                    <button onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleRemoveActor(actorId)}}>Remove</button>
                                 </div>
                             ))}
                         </div>
@@ -238,7 +240,9 @@ const TransmissionCreator = ({ isCreatorOpen, setIsCreatorOpen, creatorPosition,
                                         value={param}
                                         onChange={(e) => handleSuscParamChange(index, e.target.value)}
                                     />
-                                    <button onClick={() => handleRemoveSuscParam(index)}>Remove</button>
+                                    <button onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleRemoveSuscParam(index)}}>Remove</button>
                                 </div>
                             ))}
                         </div>
@@ -257,7 +261,9 @@ const TransmissionCreator = ({ isCreatorOpen, setIsCreatorOpen, creatorPosition,
                                         value={param}
                                         onChange={(e) => handleInfParamChange(index, e.target.value)}
                                     />
-                                    <button onClick={() => handleRemoveInfParam(index)}>Remove</button>
+                                    <button onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleRemoveInfParam(index)}}>Remove</button>
                                 </div>
                             ))}
                         </div>

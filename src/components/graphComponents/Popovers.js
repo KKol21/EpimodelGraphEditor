@@ -3,10 +3,10 @@ import NodePopover from './nodeComponents/nodePopover/NodePopover';
 import EdgePopover from "./edgeComponents/edgePopover/EdgePopover";
 
 import TransmissionCreator from "./transmissionComponents/transmissionCreator/TransmissionCreator";
-import TransmissionPopover from "./transmissionComponents/transmissionPopover/TransmissionPopover";
+import TransmissionEditor from "./transmissionComponents/transmissionEditor/TransmissionEditor";
 import useNodePopover from './nodeComponents/nodePopover/useNodePopover';
 import useEdgePopover from "./edgeComponents/edgePopover/useEdgePopover";
-import useTransmissionPopover from "./transmissionComponents/transmissionPopover/useTransmissionPopover";
+import useTransmissionEditor from "./transmissionComponents/transmissionEditor/useTransmissionEditor";
 
 export const Popovers =
     forwardRef(({ nodes, setNodes, edges, setEdges }, ref) => {
@@ -38,23 +38,43 @@ export const Popovers =
 
     // Transmission Editor Logic
     const {
-        isTmsPopoverOpen,
-        openTmsPopover,
-        tmsPopoverPosition,
+        // Popover
+        isTmsEditorOpen,
+        tmsEditorPosition,
+
+        // Source & Target
         selectedTmsSource,
         setSelectedTmsSource,
         selectedTmsTarget,
         setSelectedTmsTarget,
+
+        // Actors
         selectedTmsActors,
         handleAddTmsActor,
         handleTmsParameterChange,
         handleRemoveTmsActor,
         tmsActorParameters,
-        closeTmsPopover,
-        saveTmsChanges
-    } = useTransmissionPopover(nodes, setNodes, edges, setEdges);
 
-    useImperativeHandle(ref, () => ({
+        // Susceptibility
+        suscParams,
+        addSuscParam,
+        updateSuscParam,
+        removeSuscParam,
+
+        // Infectivity
+        infParams,
+        addInfParam,
+        updateInfParam,
+        removeInfParam,
+
+        // Editor Actions
+        openTmsEditor,
+        closeTmsEditor,
+        saveTmsChanges,
+    } = useTransmissionEditor(nodes, setNodes, edges, setEdges);
+
+
+        useImperativeHandle(ref, () => ({
         openTmsCreator(event) {
             event.stopPropagation();
             setIsCreatorOpen(true);
@@ -67,7 +87,7 @@ export const Popovers =
                     openNodePopover(event, node);
                     break;
                 case ("infection"):
-                    openTmsPopover(event, node);
+                    openTmsEditor(event, node);
                     break;
                 default:
             }
@@ -79,10 +99,10 @@ export const Popovers =
                     openEdgePopover(event, edge);
                     break;
                 case "infection":
-                    openTmsPopover(event, nodes.find(node => node.id === edge.target));
+                    openTmsEditor(event, nodes.find(node => node.id === edge.target));
                     break;
                 case "tmsTrans":
-                    openTmsPopover(event, nodes.find(
+                    openTmsEditor(event, nodes.find(
                         node => node.id === `tms_${edge.id.split('_')[1]}`
                     ))
                     break;
@@ -121,21 +141,42 @@ export const Popovers =
                 setNodes={setNodes}
                 setEdges={setEdges}
             />
-            <TransmissionPopover
-                isTmsPopoverOpen={isTmsPopoverOpen}
-                tmsPopoverPosition={tmsPopoverPosition}
+            <TransmissionEditor
+                // Popover
+                isTmsEditorOpen={isTmsEditorOpen}
+                tmsEditorPosition={tmsEditorPosition}
+
+                // Source & Target
                 selectedTmsSource={selectedTmsSource}
                 setSelectedTmsSource={setSelectedTmsSource}
                 selectedTmsTarget={selectedTmsTarget}
                 setSelectedTmsTarget={setSelectedTmsTarget}
+
+                // Actors
                 selectedTmsActors={selectedTmsActors}
                 handleAddTmsActor={handleAddTmsActor}
                 handleTmsParameterChange={handleTmsParameterChange}
                 handleRemoveTmsActor={handleRemoveTmsActor}
                 tmsActorParameters={tmsActorParameters}
+
+                // Susceptibility Params
+                suscParams={suscParams}
+                addSuscParam={addSuscParam}
+                updateSuscParam={updateSuscParam}
+                removeSuscParam={removeSuscParam}
+
+                // Infectivity Params
+                infParams={infParams}
+                addInfParam={addInfParam}
+                updateInfParam={updateInfParam}
+                removeInfParam={removeInfParam}
+
+                // Node Lists
                 susceptibleNodes={susceptibleNodes}
                 infectedNodes={infectedNodes}
-                closeTmsPopover={closeTmsPopover}
+
+                // Popover actions
+                closeTmsEditor={closeTmsEditor}
                 saveTmsChanges={saveTmsChanges}
             />
         </>
