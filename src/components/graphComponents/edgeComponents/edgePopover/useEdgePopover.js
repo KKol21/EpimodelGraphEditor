@@ -29,7 +29,15 @@ const useEdgePopover = (setEdges) => {
     const saveChanges = () => {
         setEdges((edges) =>
             edges.map((el) =>
-                el.id === selectedEdge.id ? { ...el, data: { ...selectedEdge.data } } : el
+                el.id === selectedEdge.id
+                    ? {
+                        ...el,
+                        data: {
+                            ...selectedEdge.data,
+                            params: selectedEdge.data.params.filter(param => param.trim() !== ""), // Remove empty params
+                        },
+                    }
+                    : el
             )
         );
     };

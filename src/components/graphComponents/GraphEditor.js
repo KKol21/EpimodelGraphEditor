@@ -48,17 +48,16 @@ const GraphEditor = ({ initialNodes, initialEdges }) => {
         popoversRef.current.onEdgeDoubleClick(event, edge);
     };
 
+    const openTmsCreator = (event) => {
+        popoversRef.current.openTmsCreator(event);
+    }
+
     return (
         <div>
             <MarkerDefinition />
             <NodeCreator
                 nodes={nodes}
                 setNodes={setNodes}
-            />
-            <TransmissionCreator
-                nodes={nodes}
-                setNodes={setNodes}
-                setEdges={setEdges}
             />
             <Popovers
                 ref={popoversRef}
@@ -81,6 +80,12 @@ const GraphEditor = ({ initialNodes, initialEdges }) => {
                     nodeTypes={nodeTypes}
                     style={{ width: '100%', height: '100%' }}
                 />
+
+                <div style={{ position: 'absolute', top: 10, left: 200 }}>
+                    <button onClick={openTmsCreator}>
+                        Add transmission rule
+                    </button>
+                </div>
 
                 <div style={{ position: 'absolute', top: 10, left: 10 }}>
                     <SaveFlowButton nodes={nodes} edges={edges} />

@@ -1,6 +1,8 @@
-import React, {forwardRef, useImperativeHandle} from 'react';
+import React, {forwardRef, useImperativeHandle, useState} from 'react';
 import NodePopover from './nodeComponents/nodePopover/NodePopover';
 import EdgePopover from "./edgeComponents/edgePopover/EdgePopover";
+
+import TransmissionCreator from "./transmissionComponents/transmissionCreator/TransmissionCreator";
 import TransmissionPopover from "./transmissionComponents/transmissionPopover/TransmissionPopover";
 import useNodePopover from './nodeComponents/nodePopover/useNodePopover';
 import useEdgePopover from "./edgeComponents/edgePopover/useEdgePopover";
@@ -30,7 +32,11 @@ export const Popovers =
         deleteParam
     } = useEdgePopover(setEdges);
 
-    // Transmission Popover Logic
+    // Transmission creator Logic
+    const [isCreatorOpen, setIsCreatorOpen] = useState(false);
+    const [creatorPosition, setCreatorPosition] = useState({ x: 200, y: 100 });
+
+    // Transmission Editor Logic
     const {
         isTmsPopoverOpen,
         openTmsPopover,
@@ -49,6 +55,11 @@ export const Popovers =
     } = useTransmissionPopover(nodes, setNodes, edges, setEdges);
 
     useImperativeHandle(ref, () => ({
+        openTmsCreator(event) {
+            event.stopPropagation();
+            setIsCreatorOpen(true);
+            setCreatorPosition({x: 500, y: 400});
+        },
         onNodeDoubleClick(event, node) {
             event.stopPropagation();
             switch (node.type) {
@@ -101,6 +112,14 @@ export const Popovers =
                 edgePosition={edgePosition}
                 addParam={addParam}
                 deleteParam={deleteParam}
+            />
+            <TransmissionCreator
+                isCreatorOpen={isCreatorOpen}
+                setIsCreatorOpen={setIsCreatorOpen}
+                creatorPosition={creatorPosition}
+                nodes={nodes}
+                setNodes={setNodes}
+                setEdges={setEdges}
             />
             <TransmissionPopover
                 isTmsPopoverOpen={isTmsPopoverOpen}

@@ -4,10 +4,12 @@
       "type": "susceptible"
     },
     "e": {
-      "type": "infected"
+      "type": "infected",
+      "rate": "alpha"
     },
     "i": {
-      "type": "infected"
+      "type": "infected",
+      "rate": "gamma"
     },
     "r": {
       "type": "recovered"
@@ -16,13 +18,11 @@
   "trans_data": [
     {
       "source": "i",
-      "target": "r",
-      "params": ["gamma"]
+      "target": "r"
     },
     {
       "source": "e",
-      "target": "i",
-      "params": ["alpha"]
+      "target": "i"
     }
   ],
   "tms_rules": [
