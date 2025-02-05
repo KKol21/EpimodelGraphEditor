@@ -5,6 +5,7 @@ const processGraphData = (data) => {
         data: { label: key,
                 type: data.state_data[key].type ?? "",
                 n_substates: data.state_data[key].n_substates ?? 1,
+                rate: data.state_data[key].rate ?? "",
                 color: 'green',
         },
         position: { x: 400 + 100 * Math.random(), y: 300 + 200 * Math.random()},

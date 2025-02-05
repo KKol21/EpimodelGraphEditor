@@ -2,20 +2,17 @@ import React from 'react';
 import {getBezierPath, BaseEdge, EdgeLabelRenderer} from '@xyflow/react';
 
 
-export default function TransitionEdge({id, data, markerEnd, ...props}) {
+export default function TransitionEdge({id, data, markerEnd, source, nodes, ...props}) {
     const [edgePath, labelX, labelY] = getBezierPath(props);
-    data.params = data.params || [];
+    const trans_rate = nodes.find(node => node.id === source).data.rate;
 
-    const getLabel = (params) => {
-        return params
+    const getLabel = (params = []) => {
+        const transformedParams = params
             .filter(param => param !== "")
-            .map(param => {
-                if (param.endsWith('_')) {
-                    return `(1 - ${param.slice(0, -1)})`;
-                } else {
-                    return param;
-                }
-            }).join(' * ');
+            .map(param => param.endsWith('_') ? `(1 - ${param.slice(0, -1)})` : param)
+            .join(' * ');
+
+        return transformedParams ? `${trans_rate} * ${transformedParams}` : `${trans_rate}`;
     };
 
     return (

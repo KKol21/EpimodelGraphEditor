@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { addEdge} from '@xyflow/react';
+import { addEdge } from '@xyflow/react';
 
 const useEdgeConnection = (setEdges) => {
     return useCallback(
