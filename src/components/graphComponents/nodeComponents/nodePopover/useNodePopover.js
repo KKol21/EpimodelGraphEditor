@@ -1,17 +1,16 @@
-import {useState} from 'react';
-
+import { useState } from 'react';
 
 const useNodePopover = (setNodes, setEdges) => {
     const [isNodePopoverOpen, setIsNodePopoverOpen] = useState(false);
     const [selectedNode, setSelectedNode] = useState(null);
-    const [nodePosition, setNodePosition] = useState({y: 0, x: 0});
-    const [originalID, setOriginalID] = useState(null)
+    const [nodePosition, setNodePosition] = useState({ y: 0, x: 0 });
+    const [originalID, setOriginalID] = useState(null);
 
     const openNodePopover = (event, node) => {
         setSelectedNode(node);
         setIsNodePopoverOpen(true);
         setOriginalID(node.id);
-        setNodePosition({y: event.clientY, x: event.clientX})
+        setNodePosition({ y: event.clientY, x: event.clientX });
     };
 
     const handleNodeInputChange = (e) => {
@@ -21,9 +20,12 @@ const useNodePopover = (setNodes, setEdges) => {
             if (!prevState) return prevState;
             return {
                 ...prevState,
+                // If the label input is changed, update the node's id
                 id: name === "label" ? value : prevState.id,
                 data: {
                     ...prevState.data,
+                    // For n_substates, ensure the value is converted to a number;
+                    // For all other fields (including rate), store the string value
                     [name]: name === 'n_substates' ? parseInt(value, 10) : value,
                 },
             };
@@ -37,7 +39,7 @@ const useNodePopover = (setNodes, setEdges) => {
                     return {
                         ...el,
                         id: selectedNode.id,
-                        data: { ...selectedNode.data }
+                        data: { ...selectedNode.data },
                     };
                 }
                 return el;
@@ -47,7 +49,7 @@ const useNodePopover = (setNodes, setEdges) => {
             els.map((el) => ({
                 ...el,
                 source: el.source === originalID ? selectedNode.id : el.source,
-                target: el.target === originalID ? selectedNode.id : el.target
+                target: el.target === originalID ? selectedNode.id : el.target,
             }))
         );
     };
@@ -64,7 +66,7 @@ const useNodePopover = (setNodes, setEdges) => {
         openNodePopover,
         closeNodePopover,
         handleNodeInputChange,
-        nodePosition
+        nodePosition,
     };
 };
 

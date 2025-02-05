@@ -1,32 +1,34 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 
 const useEdgePopover = (setEdges) => {
     const [isEdgePopoverOpen, setIsEdgePopoverOpen] = useState(false);
     const [selectedEdge, setSelectedEdge] = useState(null);
-    const [edgePosition, setEdgePosition] = useState({ y: 0, x: 0 });
+    const [edgePosition, setEdgePosition] = useState({ x: 0, y: 0 });
 
-    const openEdgePopover = (event, edge) => {
+    const openEdgePopover = useCallback((event, edge) => {
         setSelectedEdge(edge);
+        setEdgePosition({ x: event.clientX, y: event.clientY });
         setIsEdgePopoverOpen(true);
-        setEdgePosition({ y: event.clientY, x: event.clientX });
-    }
+    }, []);
 
-    const handleEdgeInputChange = (index, e) => {
+    const handleEdgeInputChange = useCallback((index, e) => {
         const { value } = e.target;
-        setSelectedEdge((prevState) => {
-            const updatedParams = [...prevState.data.params];
+        setSelectedEdge((prev) => {
+            if (!prev || !prev.data?.params) return prev;
+            const updatedParams = [...prev.data.params];
             updatedParams[index] = value;
             return {
-                ...prevState,
+                ...prev,
                 data: {
-                    ...prevState.data,
+                    ...prev.data,
                     params: updatedParams,
                 },
             };
         });
-    };
+    }, []);
 
-    const saveChanges = () => {
+    const saveChanges = useCallback(() => {
+        if (!selectedEdge) return;
         setEdges((edges) =>
             edges.map((el) =>
                 el.id === selectedEdge.id
@@ -34,32 +36,37 @@ const useEdgePopover = (setEdges) => {
                         ...el,
                         data: {
                             ...selectedEdge.data,
-                            params: selectedEdge.data.params.filter(param => param.trim() !== ""), // Remove empty params
+                            // Filter out any empty parameters
+                            params: (selectedEdge?.data?.params || []).filter((param) => param.trim() !== ''),
                         },
                     }
                     : el
             )
         );
-    };
+    }, [selectedEdge, setEdges]);
 
-    const closeEdgePopover = () => {
+    const closeEdgePopover = useCallback(() => {
+        saveChanges();
         setIsEdgePopoverOpen(false);
         setSelectedEdge(null);
-        saveChanges();
-    };
+    }, [saveChanges]);
 
-    const addParam = (param) => {
-        setSelectedEdge((prev) => ({
-            ...prev,
-            data: {
-                ...prev.data,
-                params: [...prev.data.params, param],
-            },
-        }));
-    };
-
-    const deleteParam = (index) => {
+    const addParam = useCallback((param) => {
         setSelectedEdge((prev) => {
+            if (!prev || !prev.data) return prev;
+            return {
+                ...prev,
+                data: {
+                    ...prev.data,
+                    params: [...(prev.data.params || []), param],
+                },
+            };
+        });
+    }, []);
+
+    const deleteParam = useCallback((index) => {
+        setSelectedEdge((prev) => {
+            if (!prev || !prev.data?.params) return prev;
             const updatedParams = prev.data.params.filter((_, i) => i !== index);
             return {
                 ...prev,
@@ -69,17 +76,17 @@ const useEdgePopover = (setEdges) => {
                 },
             };
         });
-    };
+    }, []);
 
     return {
         isEdgePopoverOpen,
         selectedEdge,
+        edgePosition,
         openEdgePopover,
         closeEdgePopover,
         handleEdgeInputChange,
-        edgePosition,
         addParam,
-        deleteParam
+        deleteParam,
     };
 };
 

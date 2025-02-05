@@ -11,7 +11,7 @@ const EdgePopover = ({
                          addParam,
                          deleteParam
                      }) => {
-    const params = selectedEdge ? selectedEdge.data.params : [];
+    const params = selectedEdge?.data?.params || [];
     const handleAddParam = () => {
         const newParam = ''; // Default new param
         addParam(newParam);

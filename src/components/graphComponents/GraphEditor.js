@@ -1,4 +1,4 @@
-import React, {useMemo, useRef} from 'react';
+import React, {useEffect, useMemo, useRef} from 'react';
 import {ReactFlow, useNodesState, useEdgesState} from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
@@ -33,11 +33,17 @@ const GraphEditor = ({initialNodes, initialEdges}) => {
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
     const popoversRef = useRef();
 
+    const nodesRef = useRef(nodes);
+    useEffect(() => {
+        nodesRef.current = nodes;
+    }, [nodes]);
+
+    // Memoize edgeTypes with an empty dependency array so that its reference remains constant.
     const edgeTypes = useMemo(() => ({
-        transition: (edgeProps) => <TransitionEdge {...edgeProps} nodes={nodes} />,
+        transition: (edgeProps) => <TransitionEdge {...edgeProps} nodes={nodesRef.current} />,
         infection: InfectionEdge,
         tmsTrans: TmsTransitionEdge,
-    }), [nodes]);
+    }), []);
 
     const onConnect = useEdgeConnection(setEdges);
 

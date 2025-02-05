@@ -1,5 +1,5 @@
 import React from 'react';
-import {Popover} from 'react-tiny-popover';
+import { Popover } from 'react-tiny-popover';
 import './NodePopover.css';
 
 const NodePopover = ({
@@ -7,7 +7,7 @@ const NodePopover = ({
                          closePopover,
                          selectedNode,
                          handleInputChange,
-                         nodePosition
+                         nodePosition,
                      }) => {
     return (
         <Popover
@@ -31,7 +31,7 @@ const NodePopover = ({
                                 <input
                                     type="text"
                                     name="type"
-                                    value={selectedNode.data.type ?? ""}
+                                    value={selectedNode.data.type ?? ''}
                                     onChange={handleInputChange}
                                 />
                             </label>
@@ -41,6 +41,15 @@ const NodePopover = ({
                                     type="number"
                                     name="n_substates"
                                     value={selectedNode.data.n_substates}
+                                    onChange={handleInputChange}
+                                />
+                            </label>
+                            <label>
+                                Outflow Rate (optional):
+                                <input
+                                    type="text"
+                                    name="rate"
+                                    value={selectedNode.data.rate ?? ''}
                                     onChange={handleInputChange}
                                 />
                             </label>
@@ -62,7 +71,13 @@ const NodePopover = ({
                 zIndex: 1000,
             }}
         >
-            <div style={{position: 'absolute', top: `${nodePosition.y - 20}px`, left: `${nodePosition.x}px`}}/>
+            <div
+                style={{
+                    position: 'absolute',
+                    top: `${nodePosition.y - 20}px`,
+                    left: `${nodePosition.x}px`,
+                }}
+            />
         </Popover>
     );
 };
