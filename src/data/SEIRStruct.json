@@ -1,7 +1,8 @@
 {
   "state_data": {
     "s": {
-      "type": "susceptible"
+      "type": "susceptible",
+      "rate": ""
     },
     "e": {
       "type": "infected",
@@ -12,7 +13,8 @@
       "rate": "gamma"
     },
     "r": {
-      "type": "recovered"
+      "type": "recovered",
+      "rate": ""
     }
   },
   "trans_data": [
@@ -30,8 +32,12 @@
       "source": "s",
       "target": "e",
       "actors-params": {
-        "i": null
-      }
+        "i": ""
+      },
+      "susc_params": [],
+      "inf_params": [],
+      "susc": [],
+      "inf": []
     }
   ]
 }

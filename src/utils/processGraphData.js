@@ -28,8 +28,8 @@ const processGraphData = (data) => {
         data: {type: 'tms', 'actors-params': tms['actors-params']},
         animated: true,
     }));
-    ...tmsEdges*/
-    return { nodes, edges: [...transEdges,] };
+    */
+    return { nodes, edges: [...transEdges] };
 };
 
 export default processGraphData;

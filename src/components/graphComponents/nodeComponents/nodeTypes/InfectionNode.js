@@ -17,20 +17,20 @@ export default memo(({data, isConnectable}) => {
 
             <Handle
                 type="target"
-                position="top"
+                position="left"
                 style={{background: '#555'}}
                 isConnectable={isConnectable}
             />
             <Handle
                 id="infection"
                 type="target"
-                position="left"
+                position="top"
                 style={{background: '#555'}}
                 isConnectable={isConnectable}
             />
             <Handle
                 type="source"
-                position="bottom"
+                position="right"
                 style={{background: '#555'}}
                 isConnectable={isConnectable}
             />
