@@ -39,7 +39,11 @@ const EdgePopover = ({
                                     }}>Delete</button>
                                 </div>
                             ))}
-                            <button onClick={handleAddParam}>Add Parameter</button>
+                            <button className="add-param-button" onClick={handleAddParam}>Add Parameter</button>
+                            <div className="popover-buttons">
+                                <button className="save-button" onClick={() => closeEdgePopover(true)}>Save</button>
+                                <button className="cancel-button" onClick={() => closeEdgePopover(false)}>Cancel</button>
+                            </div>
                         </div>
                     ) : (
                         <div>No edge selected</div>

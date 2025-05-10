@@ -3,67 +3,117 @@
 .popover-form {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    background-color: #f0f0f0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    z-index: 10;
+    gap: 12px;
+    background-color: var(--card-bg);
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    width: 240px;
+    box-sizing: border-box;
+    border: 1px solid var(--border-color);
 }
 
 .popover-form h2 {
-    margin-top: 0;
-    font-size: 18px;
-    margin-bottom: 10px;
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-color);
 }
 
+/* Parameter row styling */
 .param-row {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
+    gap: 8px;
     width: 100%;
 }
 
 .param-row input {
-    padding: 8px;
+    padding: 8px 10px;
     font-size: 14px;
-    margin-right: 5px; /* Space between inputs */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100px; /* Adjusted for a better layout */
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    flex-grow: 1;
+    box-sizing: border-box;
 }
 
+/* Delete button for param rows */
 .param-row button {
-    padding: 8px 12px;
-    font-size: 14px;
+    padding: 8px 10px;
+    font-size: 13px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
+    background-color: #ef4444;
+    color: white;
     cursor: pointer;
-    background-color: #dc3545; /* Red for delete */
-    color: #fff;
+    transition: background-color 0.2s ease;
 }
 
 .param-row button:hover {
-    background-color: #c82333;
+    background-color: #dc2626;
 }
 
+/* Button row at bottom */
 .popover-buttons {
     display: flex;
-    justify-content: flex-end; /* Aligning button to the right */
-    margin-top: 10px;
+    justify-content: space-between;
     gap: 10px;
+    margin-top: 8px;
 }
 
-.popover-buttons button {
-    padding: 8px 16px;
+/* Save = primary color */
+.save-button {
+    flex: 1;
+    padding: 8px;
     font-size: 14px;
+    font-weight: 600;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
+    background-color: var(--primary);
+    color: white;
     cursor: pointer;
-    background-color: #007bff; /* Blue for add */
-    color: #fff;
 }
 
-.popover-buttons button:hover {
-    background-color: #0056b3;
+.save-button:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Cancel = neutral gray */
+.cancel-button {
+    flex: 1;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    background-color: #9ca3af;
+    color: white;
+    cursor: pointer;
+}
+
+.cancel-button:hover {
+    background-color: #6b7280;
+}
+
+.add-param-button {
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--primary);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 4px;
+}
+
+.add-param-button:hover {
+    background-color: var(--primary-hover);
 }

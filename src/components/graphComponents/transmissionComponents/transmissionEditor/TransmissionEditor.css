@@ -1,72 +1,137 @@
 .popover-form {
+    width: 380px;
+    max-width: 90vw;
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    background-color: #f0f0f0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    z-index: 10;
+    gap: 14px;
 }
 
 .popover-form h2 {
-    margin-top: 0;
     font-size: 18px;
-    margin-bottom: 10px;
+    font-weight: 600;
+    margin: 0;
+    color: #1f2937;
 }
 
-.popover-form label {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 10px;
+.popover-form h3 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: -4px;
+    color: #374151;
+}
+
+/* Select dropdowns */
+.transmission-select {
+    width: 100%;
+    padding: 8px 10px;
     font-size: 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: #f3f4f6;
+    color: #1f2937;
+    box-sizing: border-box;
 }
 
-.popover-form input,
-.popover-form select {
-    padding: 8px;
-    font-size: 14px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 150px;
-}
-
+/* Actor / Param rows */
 .actor-parameter {
     display: flex;
     align-items: center;
-    margin-bottom: 10px;
-}
-
-.parameter-input {
-    margin-left: 10px;
-    margin-right: 10px;
-}
-
-.popover-buttons {
-    display: flex;
     justify-content: space-between;
+    gap: 8px;
+    margin-top: 6px;
     width: 100%;
 }
 
-.popover-buttons button {
-    padding: 8px 16px;
+.parameter-input {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 10px;
     font-size: 14px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: #f9fafb;
+    color: #111827;
+    box-sizing: border-box;
 }
 
-.popover-buttons button:hover {
-    background-color: #0056b3;
+/* Remove buttons inside parameter rows */
+.actor-parameter button {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0;
+    white-space: nowrap;
+    height: 36px;
+}
+
+.actor-parameter button:hover {
+    background-color: #dc2626;
+}
+
+/* Add param buttons */
+.add-param-button {
+    width: fit-content;
+    padding: 6px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    background-color: #2563eb;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.add-param-button:hover {
+    background-color: #1d4ed8;
+}
+
+
+/* Save / Close buttons */
+.popover-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.popover-buttons button {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.popover-buttons button:first-child {
+    background-color: #2563eb;
+    color: white;
+}
+
+.popover-buttons button:first-child:hover {
+    background-color: #1d4ed8;
 }
 
 .popover-buttons button:last-child {
-    background-color: #6c757d;
+    background-color: #6b7280;
+    color: white;
 }
 
 .popover-buttons button:last-child:hover {
-    background-color: #5a6268;
+    background-color: #4b5563;
 }

@@ -1,6 +1,8 @@
 import React, {useEffect, useMemo, useRef} from 'react';
 import {ReactFlow, useNodesState, useEdgesState} from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
+import './GraphEditor.css';
+
 
 // Node types
 import StateNode from "./nodeComponents/nodeTypes/StateNode";
@@ -89,18 +91,14 @@ const GraphEditor = ({initialNodes, initialEdges}) => {
                         style={{width: '100%', height: '100%'}}
                     />
 
-                    <div style={{position: 'absolute', top: 10, left: 200}}>
+                    <div className="toolbar">
+                        <SaveFlowButton nodes={nodes} edges={edges}/>
+                        <LoadFlowButton setNodes={setNodes} setEdges={setEdges}/>
                         <button onClick={openTmsCreator}>
                             Add transmission rule
                         </button>
                     </div>
 
-                    <div style={{position: 'absolute', top: 10, left: 10}}>
-                        <SaveFlowButton nodes={nodes} edges={edges}/>
-                    </div>
-                    <div style={{position: 'absolute', top: 10, left: 50}}>
-                        <LoadFlowButton setNodes={setNodes} setEdges={setEdges}/>
-                    </div>
                 </div>
             </div>
         </ReactFlowProvider>

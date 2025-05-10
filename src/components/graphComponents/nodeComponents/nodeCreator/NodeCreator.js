@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './NodeCreator.css';
+import "./NodeCreator.css";
 
 const NodeCreator = ({ nodes, setNodes }) => {
     const [newNodeLabel, setNewNodeLabel] = useState('');
@@ -36,41 +36,59 @@ const NodeCreator = ({ nodes, setNodes }) => {
     };
 
     return (
-        <div className="node-handler" style={{ color: newNodeColor }}>
-            <input
-                type="text"
-                className="node-input"
-                placeholder="Node label"
-                value={newNodeLabel}
-                onChange={(e) => setNewNodeLabel(e.target.value)}
-            />
-            <input
-                type="text"
-                className="node-input"
-                placeholder="Node type"
-                value={newNodeType}
-                onChange={(e) => setNewNodeType(e.target.value)}
-            />
-            <input
-                type="number"
-                className="node-input"
-                placeholder="Number of substates"
-                value={newNodeSubstates}
-                onChange={(e) => setNewNodeSubstates(Number(e.target.value))}
-            />
-            <input
-                type="text"
-                className="node-input"
-                placeholder="Outflow rate (optional)"
-                value={newNodeRate}
-                onChange={(e) => setNewNodeRate(e.target.value)}
-            />
-            <input
-                className="nodrag"
-                type="color"
-                defaultValue={newNodeColor}
-                onChange={(e) => setNewNodeColor(e.target.value)}
-            />
+        <div className="node-handler">
+            <div className="node-field">
+                <label>Node label</label>
+                <input
+                    type="text"
+                    className="input-standard"
+                    placeholder="e.g. S"
+                    value={newNodeLabel}
+                    onChange={(e) => setNewNodeLabel(e.target.value)}
+                />
+            </div>
+
+            <div className="node-field">
+                <label>Node type</label>
+                <input
+                    type="text"
+                    className="input-standard"
+                    placeholder="e.g. susceptible"
+                    value={newNodeType}
+                    onChange={(e) => setNewNodeType(e.target.value)}
+                />
+            </div>
+
+            <div className="node-field">
+                <label>Number of substates</label>
+                <input
+                    type="number"
+                    className="input-standard"
+                    value={newNodeSubstates}
+                    onChange={(e) => setNewNodeSubstates(Number(e.target.value))}
+                />
+            </div>
+
+            <div className="node-field">
+                <label>Outflow rate (optional)</label>
+                <input
+                    type="text"
+                    className="input-standard"
+                    value={newNodeRate}
+                    onChange={(e) => setNewNodeRate(e.target.value)}
+                />
+            </div>
+
+            <div className="node-field">
+                <label>Node color</label>
+                <input
+                    className="color-picker"
+                    type="color"
+                    value={newNodeColor}
+                    onChange={(e) => setNewNodeColor(e.target.value)}
+                />
+            </div>
+
             <button className="add-node-button" onClick={addNode}>
                 Add Node
             </button>

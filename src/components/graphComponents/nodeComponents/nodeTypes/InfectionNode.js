@@ -5,17 +5,22 @@ export default memo(({data, isConnectable}) => {
     return (
         <div
             style={{
-                width: "100px",
-                height: "100px",
+                width: 100,
+                height: 100,
                 borderRadius: "50%",
-                background: "red",
+                background: "#f87171",  // soft red
+                border: "2px solid #ef4444",
+                boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                fontWeight: 600,
+                color: "#fff"
             }}
         >
 
-            <Handle
+
+        <Handle
                 type="target"
                 position="left"
                 style={{background: '#555'}}

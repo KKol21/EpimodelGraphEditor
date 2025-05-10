@@ -1,38 +1,146 @@
-.transmission-manager {
-    position: absolute;
-    top: 320px; /* Adjust as needed */
-    left: 10px;
+.popover-form {
+    width: 100%; /* or 400px if you want it roomier */
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    background-color: #f0f0f0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    z-index: 10;
+    gap: 14px;
 }
 
+
+
+.popover-form h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--text-color);
+}
+
+/* Selects */
 .transmission-select {
-    width: 150px;
-    margin-bottom: 8px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    box-sizing: border-box;
+}
+
+/* Actor/param rows */
+.actor-parameter {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
 }
 
 .actor-parameter {
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
+    justify-content: space-between;
+    gap: 8px;
+    margin-top: 6px;
+    width: 100%;
 }
 
-.actor-parameter span {
-    margin-right: 8px;
-}
 
 .parameter-input {
-    width: 100px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    flex: 1;
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    box-sizing: border-box;
+}
+
+.actor-parameter button {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0;
+    height: 36px;
+}
+
+
+/* Remove buttons inside actor/param rows */
+.actor-parameter button {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.actor-parameter button:hover {
+    background-color: #dc2626;
+}
+
+/* Add Param buttons */
+.popover-form button.add-param {
+    padding: 6px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--primary);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    width: fit-content;
+}
+
+.popover-form button.add-param:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Final action buttons */
+.popover-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.popover-buttons button {
+    flex: 1;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.popover-buttons .save-button {
+    background-color: var(--primary);
+    color: white;
+}
+
+.popover-buttons .save-button:hover {
+    background-color: var(--primary-hover);
+}
+
+.popover-buttons .cancel-button {
+    background-color: #9ca3af;
+    color: white;
+}
+
+.popover-buttons .cancel-button:hover {
+    background-color: #6b7280;
 }

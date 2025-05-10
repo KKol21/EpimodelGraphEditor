@@ -54,8 +54,10 @@ const useNodePopover = (setNodes, setEdges) => {
         );
     };
 
-    const closeNodePopover = () => {
-        saveChanges();
+    const closeNodePopover = (save=false) => {
+        if (save) {
+            saveChanges();
+        }
         setIsNodePopoverOpen(false);
         setSelectedNode(null);
     };

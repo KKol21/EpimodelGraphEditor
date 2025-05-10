@@ -45,11 +45,17 @@ const useEdgePopover = (setEdges) => {
         );
     }, [selectedEdge, setEdges]);
 
-    const closeEdgePopover = useCallback(() => {
-        saveChanges();
-        setIsEdgePopoverOpen(false);
-        setSelectedEdge(null);
-    }, [saveChanges]);
+    const closeEdgePopover = useCallback(
+        (shouldSave = true) => {
+            if (shouldSave) {
+                saveChanges();
+            }
+            setIsEdgePopoverOpen(false);
+            setSelectedEdge(null);
+        },
+        [saveChanges]
+    );
+
 
     const addParam = useCallback((param) => {
         setSelectedEdge((prev) => {
