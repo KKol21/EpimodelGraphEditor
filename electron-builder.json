@@ -1,0 +1,21 @@
+{
+  "appId": "com.epimodel.editor",
+  "productName": "EpiModelEditor",
+  "extraMetadata": {
+    "name": "EpiModelEditor"
+  },
+  "files": [
+    "build/**/*"
+  ],
+  "directories": {
+    "buildResources": "assets"
+  },
+  "win": {
+    "target": [
+      {
+        "target": "nsis",
+        "arch": ["x64"]
+      }
+    ]
+  }
+}

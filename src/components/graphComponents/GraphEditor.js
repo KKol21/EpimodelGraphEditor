@@ -19,6 +19,7 @@ import TmsTransitionEdge from "./edgeComponents/TmsTransitionEdge";
 // Other
 import MarkerDefinition from "../svg/MarkerDefinition";
 import SaveFlowButton from "../SaveFlowButton";
+import LoadFlowButton from "../LoadFlowButton";
 import {ReactFlowProvider} from "reactflow";
 
 const nodeTypes = {
@@ -96,6 +97,9 @@ const GraphEditor = ({initialNodes, initialEdges}) => {
 
                     <div style={{position: 'absolute', top: 10, left: 10}}>
                         <SaveFlowButton nodes={nodes} edges={edges}/>
+                    </div>
+                    <div style={{position: 'absolute', top: 10, left: 50}}>
+                        <LoadFlowButton setNodes={setNodes} setEdges={setEdges}/>
                     </div>
                 </div>
             </div>
